@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Slider</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+
+    <style>
+      /* Reviews Start */
+      #reviews {
+        width: 100%;
+        padding: 80px 0;
+      }
+
+      #reviews .reviews-heading span {
+        font-size: 16px;
+        font-weight: 500;
+        font-family: var(--secondary-font);
+        color: var(--text-color-1);
+        background-color: var(--primary-color);
+        padding: 8px 30px;
+        border-radius: 30px;
+      }
+
+      #reviews .reviews-heading h1 {
+        max-width: 430px;
+        font-size: 34px;
+        font-weight: bold;
+        padding: 20px 0px 20px 0px;
+        font-family: var(--primary-font);
+        color: var(--text-color-1);
+        margin-bottom: 20px;
+      }
+
+      #reviews .customer-slider {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      #reviews .customer-content {
+        width: 100%;
+        text-align: left;
+      }
+
+      #reviews .customer-content .content {
+        display: none;
+      }
+
+      #reviews .customer-content .content.active {
+        display: block;
+      }
+
+      #reviews .navigation {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      #reviews .navigation button {
+        background-color: transparent;
+        border: 2px solid #fbbd23;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      #reviews .navigation button:hover {
+        background-color: #fbbd23;
+        color: white;
+      }
+
+      #reviews .customer-profiles {
+        display: flex;
+        gap: 10px;
+      }
+
+      #reviews .customer-profiles .profile {
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: border 0.3s ease;
+      }
+
+      #reviews .customer-profiles .profile:nth-child(1),
+      #reviews .customer-profiles .profile:nth-child(3) {
+        margin-top: -40px;
+      }
+
+      #reviews .customer-profiles .profile.active {
+        border-top: 8px solid #fbbd23;
+        border-left: 1px solid #fbbd23;
+        border-right: 1px solid #fbbd23;
+        border-bottom: 1px solid #fbbd23;
+      }
+
+      #reviews .customer-profiles .profile img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      #reviews .left-section {
+        width: 100%;
+        gap: 20px;
+        display: flex;
+        align-items: center;
+      }
+
+      #reviews .right-section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 45px;
+      }
+      /* Reviews End */
+    </style>
+  </head>
+  <body>
+    <section id="reviews">
+      <div class="container">
+        <div class="reviews-heading">
+          <span>Reviews</span>
+          <h1>Customer Hear What They Say!</h1>
+        </div>
+
+        <div class="row customer-slider">
+          <div class="col-lg-5">
+            <div class="right-section">
+              <div class="customer-profiles">
+                <div class="profile active" data-customer="1">
+                  <img src="https://via.placeholder.com/60" alt="Customer 1" />
+                </div>
+                <div class="profile" data-customer="2">
+                  <img src="https://via.placeholder.com/60" alt="Customer 2" />
+                </div>
+                <div class="profile" data-customer="3">
+                  <img src="https://via.placeholder.com/60" alt="Customer 3" />
+                </div>
+                <div class="profile" data-customer="4">
+                  <img src="https://via.placeholder.com/60" alt="Customer 4" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="left-section">
+              <div class="navigation">
+                <button class="prev">&lt;</button>
+              </div>
+              <div class="customer-content">
+                <div class="content active" data-customer="1">
+                  <h3>Craig L. Villasenor</h3>
+                  <p>Assistant Manager</p>
+                  <p>
+                    There are many variations of passages of Lorem Ipsum
+                    available, There are many variations of passages of Lorem
+                    Ipsum available, There are many variations of passages of
+                    Lorem Ipsum available, There are many variations of passages
+                    of Lorem Ipsum available, There are many variations of
+                    passages of Lorem Ipsum available,
+                  </p>
+                </div>
+                <div class="content" data-customer="2">
+                  <h3>Jane Doe</h3>
+                  <p>Project Manager</p>
+                  <p>Another content for customer 2...</p>
+                </div>
+                <div class="content" data-customer="3">
+                  <h3>John Smith</h3>
+                  <p>Designer</p>
+                  <p>Another content for customer 3...</p>
+                </div>
+                <div class="content" data-customer="4">
+                  <h3>Sarah Connor</h3>
+                  <p>Engineer</p>
+                  <p>Another content for customer 4...</p>
+                </div>
+              </div>
+              <div class="navigation">
+                <button class="next">&gt;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const profiles = document.querySelectorAll(".customer-profiles .profile");
+      const contents = document.querySelectorAll(".customer-content .content");
+      const prevButton = document.querySelector(".navigation .prev");
+      const nextButton = document.querySelector(".navigation .next");
+      let currentCustomer = 0;
+
+      function updateSlider(index) {
+        profiles.forEach((profile) => profile.classList.remove("active"));
+        contents.forEach((content) => content.classList.remove("active"));
+
+        profiles[index].classList.add("active");
+        contents[index].classList.add("active");
+      }
+
+      profiles.forEach((profile, index) => {
+        profile.addEventListener("click", () => {
+          currentCustomer = index;
+          updateSlider(currentCustomer);
+        });
+      });
+
+      prevButton.addEventListener("click", () => {
+        currentCustomer =
+          (currentCustomer - 1 + profiles.length) % profiles.length;
+        updateSlider(currentCustomer);
+      });
+
+      nextButton.addEventListener("click", () => {
+        currentCustomer = (currentCustomer + 1) % profiles.length;
+        updateSlider(currentCustomer);
+      });
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

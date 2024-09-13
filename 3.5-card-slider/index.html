@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swiper Slider Example</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+      }
+
+      .card-wrapper {
+        width: 100%;
+
+        overflow: hidden;
+      }
+
+      .swiper-container {
+        width: 100%;
+      }
+
+      .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f5f5f5;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-size: 1.2rem;
+        height: 250px; /* Adjust as needed */
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .swiper-slide img {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+      }
+
+      .swiper-slide-content {
+        text-align: center;
+      }
+
+      .swiper-slide h3 {
+        margin: 10px 0;
+        font-size: 1.4rem;
+      }
+
+      .swiper-slide p {
+        margin: 0;
+        font-size: 1rem;
+        color: #555;
+      }
+
+      .swiper-button-next,
+      .swiper-button-prev {
+        color: #007bff;
+      }
+
+      .swiper-pagination-bullet-active {
+        background-color: #007bff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card-wrapper">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="swiper-slide-content">
+              <img src="icon1.png" alt="Icon 1" />
+              <h3>Swimming</h3>
+              <p>
+                Our indoor pool provides a tranquil sanctuary where you can
+                enjoy a leisurely swim or simply float your cares away.
+              </p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="swiper-slide-content">
+              <img src="icon2.png" alt="Icon 2" />
+              <h3>Wi-fi</h3>
+              <p>
+                Our high-speed Wi-Fi facilities, you can effortlessly stay in
+                touch with loved ones.
+              </p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="swiper-slide-content">
+              <img src="icon3.png" alt="Icon 3" />
+              <h3>AC (Air-Conditioning)</h3>
+              <p>
+                Our central air conditioning system ensures consistent and
+                efficient cooling throughout the hotel premises.
+              </p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="swiper-slide-content">
+              <img src="icon3.png" alt="Icon 4" />
+              <h3>AC (Air-Conditioning)</h3>
+              <p>
+                Our central air conditioning system ensures consistent and
+                efficient cooling throughout the hotel premises.
+              </p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="swiper-slide-content">
+              <img src="icon3.png" alt="Icon 5" />
+              <h3>AC (Air-Conditioning)</h3>
+              <p>
+                Our central air conditioning system ensures consistent and
+                efficient cooling throughout the hotel premises.
+              </p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="swiper-slide-content">
+              <img src="icon3.png" alt="Icon 6" />
+              <h3>AC (Air-Conditioning)</h3>
+              <p>
+                Our central air conditioning system ensures consistent and
+                efficient cooling throughout the hotel premises.
+              </p>
+            </div>
+          </div>
+          <!-- Add more slides as needed -->
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script>
+      const swiper = new Swiper(".swiper-container", {
+        slidesPerView: 3.7, // Default for larger screens
+        centeredSlides: true,
+        spaceBetween: 30, // Space between slides
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+          1200: {
+            slidesPerView: 3.5,
+          },
+          992: {
+            slidesPerView: 2.5,
+          },
+          768: {
+            slidesPerView: 1.5,
+          },
+          576: {
+            slidesPerView: 1, // Only one slide visible
+            spaceBetween: 10, // Optional: Adjust spacing for small screens
+          },
+          0: {
+            slidesPerView: 1, // Ensures one card is shown at all sizes down to 0px
+            spaceBetween: 10, // Adjust as needed
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
