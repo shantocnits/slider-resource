@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Page</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://sachinchoolur.github.io/lightslider/dist/js/lightslider.js"></script>
+    <style>
+      .single_product_wrapper {
+        margin-top: 50px;
+      }
+
+      .demo_custom {
+        width: 100%;
+        height: 100%;
+      }
+
+      .card_custom .zoom_container {
+        width: 100%;
+        aspect-ratio: 16 / 16;
+        border-radius: 16px;
+        background: linear-gradient(180deg, #cfcfcf 100%);
+        border: 1px solid #9292923b !important;
+      }
+
+      .card_custom .zoom_container .zoom_container_img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        background-size: cover;
+        background-position: center;
+        object-fit: cover;
+        margin: auto;
+      }
+
+      .card_custom .zoom_container_img img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        margin: auto;
+      }
+
+      .lSSlideOuter .lSPager.lSGallery {
+        margin-top: 16px !important;
+      }
+
+      .lSSlideOuter .lSPager.lSGallery li.active {
+        border: 1px solid #929292 !important;
+      }
+
+      .lSSlideOuter .lSPager.lSGallery li {
+        width: 100%;
+        aspect-ratio: 16 / 16;
+        background-size: cover;
+        background-position: center;
+        object-fit: cover;
+        transition: 0.4s;
+        border-radius: 12px !important;
+        border: 1px solid #9292923b !important;
+      }
+
+      .lSSlideOuter .lSPager.lSGallery li img {
+        width: 100%;
+        height: 100%;
+        border-radius: 12px !important;
+        background-size: cover;
+        transition: 0.4s;
+      }
+
+      .product_details_custom {
+        height: 100%;
+        border-bottom: 1px solid var(--accent-2);
+        padding-bottom: 24px;
+      }
+
+      .single_product .product_details_custom h1 {
+        font-size: 28px;
+        color: var(--primary-color);
+        font-weight: 700;
+        margin-bottom: 40px;
+      }
+
+      .single_product .product_details_custom .price {
+        margin: 10px 0;
+      }
+
+      .single_product .product_details_custom .rating_custom {
+        display: flex;
+        align-items: center;
+      }
+
+      .single_product .product_details_custom .rating_custom .bar {
+        color: var(--accent);
+        margin: 0 10px;
+      }
+
+      .single_product .product_details_custom .review,
+      .single_product .product_details_custom .rate {
+        font-size: 18px;
+        font-weight: 500;
+        margin: 0;
+        color: var(--text-color);
+      }
+
+      .single_product .product_details_custom .review span {
+        color: var(--accent);
+        margin-left: 5px;
+      }
+
+      .single_product .rating_custom .star {
+        font-size: 26px;
+        color: #ffb800;
+        margin-right: 5px;
+      }
+
+      .single_product .discounted_price {
+        font-size: 26px;
+        color: var(--secondary-color);
+        font-weight: 800;
+      }
+
+      .single_product .original_price {
+        text-decoration: line-through;
+        color: var(--text-color);
+        font-size: 18px;
+        margin-left: 10px;
+        font-weight: 500;
+      }
+
+      .product_details_custom .store_wrapper .store_tag {
+        font-size: 16px;
+        background: rgba(0, 154, 52, 0.2);
+        padding: 4px 20px;
+        border-radius: 30px;
+        color: #067d62;
+        font-weight: 600;
+        display: inline-block;
+        margin: 16px 0px 18px 0;
+      }
+
+      .store_wrapper {
+        border-bottom: 1px solid var(--accent-2);
+      }
+
+      .store_wrapper .store_status {
+        font-size: 18px !important;
+        color: var(--primary-color);
+        font-weight: 500;
+        margin-bottom: 24px;
+      }
+
+      .store_wrapper .store_status span {
+        font-size: 18px;
+        color: #067d62;
+        padding-right: 5px;
+      }
+
+      .product_all_details {
+        padding: 24px 0;
+        border-bottom: 1px solid var(--accent-2);
+      }
+
+      .product_all_details .store_status,
+      .product_all_details .availability_custom {
+        font-size: 18px;
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      .product_all_details .availability_custom {
+        display: flex;
+        align-items: center;
+      }
+
+      .product_all_details .availability_custom .available {
+        width: 190px;
+        display: block;
+      }
+
+      .single_product .availability_custom .in_stock {
+        color: #067d62;
+        display: flex;
+        align-items: center;
+      }
+
+      .single_product .availability_custom .in_stock p {
+        padding-left: 10px;
+        margin: 0px;
+      }
+
+      .single_product .product_info_custom {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .single_product .product_info_custom strong {
+        display: block !important;
+        width: 190px;
+      }
+
+      .single_product .product_info_custom li {
+        font-size: 18px;
+        display: flex;
+        margin: 0px 0px 20px 0px;
+      }
+
+      .single_product .product_info_custom li p {
+        font-size: 18px;
+        font-weight: 600;
+        padding-left: 10px;
+        margin: 0px;
+        color: var(--accent);
+      }
+
+      .single_product .product_info_custom li:nth-last-child(1) {
+        margin-bottom: 0px;
+      }
+
+      .single_product ul {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0;
+      }
+
+      .single_product li {
+        display: block;
+        float: left;
+        margin-right: 6px;
+        cursor: pointer;
+      }
+      .single_product .select_color_custom {
+        display: flex;
+        align-items: center;
+        margin: 24px 0;
+        font-weight: 600;
+      }
+      .single_product .select_color_custom label {
+        width: 190px;
+        font-size: 18px !important;
+        color: var(--primary-color);
+        font-weight: bold !important;
+      }
+      .single_product .color_btn {
+        border: none;
+        padding: 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-left: 10px;
+        border: 2px solid transparent;
+      }
+      .select_color_custom .color_btn:focus {
+        border: 2px solid var(--secondary-color);
+        outline: none;
+      }
+
+      .single_product .quantity_wrapper {
+        display: inline-block;
+        margin-right: 15px;
+      }
+
+      .single_product .quantity_custom {
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--accent-2);
+        border-radius: 34px;
+        padding: 10px 10px;
+        -webkit-border-radius: 34px;
+        -moz-border-radius: 34px;
+        -ms-border-radius: 34px;
+        -o-border-radius: 34px;
+      }
+
+      .single_product .quantity_custom input {
+        width: 50px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 600 !important;
+        color: var(--text-color);
+        font-size: 18px;
+        border: none;
+        outline: none;
+      }
+
+      .single_product .quantity_custom button:hover {
+        background-color: #0056b3;
+      }
+
+      .single_product .btn-increase,
+      .single_product .btn-decrease {
+        width: 20px !important;
+        height: 20px !important;
+        padding: 0px !important;
+        font-size: 26px !important;
+        font-weight: 600;
+        color: var(--text-color) !important;
+        display: flex;
+        justify-content: center;
+        background: transparent !important;
+        align-items: center;
+      }
+
+      /* Hide default browser number input buttons */
+      .single_product .quantity_custom input::-webkit-outer-spin-button,
+      .single_product .quantity_custom input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      .single_product .quantity_custom input[type="number"] {
+        -moz-appearance: textfield;
+      }
+
+      .single_product .action_buttons_custom {
+        display: flex;
+        align-items: center;
+      }
+      .single_product .action_buttons_custom .add_to_cart,
+      .single_product .action_buttons_custom .buy_now {
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 30px;
+        padding: 10px 30px;
+        margin-right: 10px;
+        transition: 0.3s;
+      }
+      .single_product .add_to_cart {
+        background: var(--primary-color);
+        color: var(--white);
+        border: none;
+      }
+      .single_product .buy_now {
+        background: var(--secondary-color);
+        color: var(--white);
+        border: none;
+      }
+      .single_product .add_to_cart:hover,
+      .buy_now:hover {
+        opacity: 0.9;
+      }
+      .single_product .gift_receipt_custom {
+        margin-top: 24px;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+      }
+      .single_product .gift_receipt_custom label {
+        display: flex;
+        align-items: center;
+      }
+      .single_product .gift_receipt_custom label p {
+        margin: 0;
+      }
+      .single_product .gift_receipt_custom input {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        border-radius: 60x !important;
+        border: 4px solid var(--text-color);
+      }
+
+      /* Zoom container */
+      .zoom_container {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .zoom_container img {
+        width: 100%;
+        height: auto;
+      }
+
+      /* The zoom box that appears when hovering */
+      .zoom_box {
+        position: absolute;
+        border-radius: 10%;
+        border: 2px solid #fff;
+        width: 150px;
+        height: 150px;
+        display: none;
+        z-index: 10;
+        overflow: hidden;
+        pointer-events: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Display zoomed image in the zoom box */
+      .zoom_box img {
+        position: absolute;
+        width: 1100px;
+      }
+
+      /* Show zoom box on hover */
+      .zoom_container:hover .zoom_box {
+        display: block;
+      }
+
+      .lSAction > a {
+        display: none !important;
+      }
+
+      .single_product_wrapper .about {
+        margin-top: 20px;
+      }
+
+      .single_product_wrapper .about .about_title {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+      }
+
+      .single_product_wrapper .about p {
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--text-color);
+        margin-bottom: 10px;
+      }
+
+      .single_product_wrapper .about p:nth-last-child(1) {
+        margin-bottom: 0px;
+      }
+
+      @media screen and (max-width: 992px) {
+        .product_details_custom {
+          margin-top: 40px;
+        }
+      }
+
+      @media screen and (max-width: 576px) {
+        .single_product .action_buttons_custom {
+          display: block;
+        }
+
+        .single_product .action_buttons_custom .add_to_cart,
+        .single_product .action_buttons_custom .buy_now {
+          font-size: 16px;
+          padding: 8px 20px;
+        }
+
+        .single_product .quantity_custom {
+          padding: 8px;
+          margin-bottom: 20px;
+        }
+
+        .product_all_details .availability_custom .available {
+          width: 100px;
+          display: inline-block;
+          font-size: 16px;
+        }
+
+        .single_product .product_info_custom strong {
+          display: inline-block !important;
+          width: 100px;
+          font-size: 16px;
+        }
+
+        .store_wrapper .store_status,
+        .single_product .product_info_custom li p {
+          font-size: 16px;
+        }
+      }
+
+      /* Product Single Start */
+    </style>
+  </head>
+  <body>
+    <!-- Product Single Start -->
+    <div class="single_product">
+      <div class="container">
+        <div class="back_home_page">
+          <a href="./index.html" class="home_btn"
+            ><i class="fa-solid fa-angle-left"></i
+          ></a>
+          <p>Back to Home</p>
+        </div>
+        <div class="single_product_wrapper">
+          <div class="row no-gutters">
+            <div class="col-lg-6">
+              <div class="card_custom">
+                <div class="demo_custom">
+                  <ul id="lightSlider">
+                    <li
+                      data-thumb="./assets/img/product/populer-product-img1.webp"
+                    >
+                      <div class="zoom_container">
+                        <div class="zoom_container_img">
+                          <img
+                            src="./assets/img/product/populer-product-img1.webp"
+                            alt="Product Image 1"
+                          />
+                        </div>
+
+                        <div class="zoom_box">
+                          <img
+                            src="./assets/img/product/populer-product-img1.webp"
+                            alt="Zoom Image 1"
+                          />
+                        </div>
+                      </div>
+                    </li>
+                    <li
+                      data-thumb="./assets/img/product/single-product-slider-2.png"
+                    >
+                      <div class="zoom_container">
+                        <div class="zoom_container_img">
+                          <img
+                            src="./assets/img/product/single-product-slider-2.png"
+                            alt="Product Image 1"
+                          />
+                        </div>
+
+                        <div class="zoom_box">
+                          <img
+                            src="./assets/img/product/single-product-slider-2.png"
+                            alt="Zoom Image 1"
+                          />
+                        </div>
+                      </div>
+                    </li>
+                    <li
+                      data-thumb="./assets/img/product/single-product-slider-3.png"
+                    >
+                      <div class="zoom_container">
+                        <div class="zoom_container_img">
+                          <img
+                            src="./assets/img/product/single-product-slider-3.png"
+                            alt="Product Image 1"
+                          />
+                        </div>
+
+                        <div class="zoom_box">
+                          <img
+                            src="./assets/img/product/single-product-slider-3.png"
+                            alt="Zoom Image 1"
+                          />
+                        </div>
+                      </div>
+                    </li>
+                    <li
+                      data-thumb="./assets/img/product/single-product-slider-4.png"
+                    >
+                      <div class="zoom_container">
+                        <div class="zoom_container_img">
+                          <img
+                            src="./assets/img/product/single-product-slider-4.png"
+                            alt="Product Image 1"
+                          />
+                        </div>
+
+                        <div class="zoom_box">
+                          <img
+                            src="./assets/img/product/single-product-slider-4.png"
+                            alt="Zoom Image 1"
+                          />
+                        </div>
+                      </div>
+                    </li>
+                    <li
+                      data-thumb="./assets/img/product/single-product-slider-5.png"
+                    >
+                      <div class="zoom_container">
+                        <div class="zoom_container_img">
+                          <img
+                            src="./assets/img/product/single-product-slider-5.png"
+                            alt="Product Image 1"
+                          />
+                        </div>
+
+                        <div class="zoom_box">
+                          <img
+                            src="./assets/img/product/single-product-slider-5.png"
+                            alt="Zoom Image 1"
+                          />
+                        </div>
+                      </div>
+                    </li>
+                    <li
+                      data-thumb="./assets/img/product/populer-product-img1.webp"
+                    >
+                      <div class="zoom_container">
+                        <div class="zoom_container_img">
+                          <img
+                            src="./assets/img/product/populer-product-img1.webp"
+                            alt="Product Image 1"
+                          />
+                        </div>
+
+                        <div class="zoom_box">
+                          <img
+                            src="./assets/img/product/populer-product-img1.webp"
+                            alt="Zoom Image 1"
+                          />
+                        </div>
+                      </div>
+                    </li>
+                    <li
+                      data-thumb="./assets/img/product/single-product-slider-2.png"
+                    >
+                      <div class="zoom_container">
+                        <div class="zoom_container_img">
+                          <img
+                            src="./assets/img/product/single-product-slider-2.png"
+                            alt="Product Image 1"
+                          />
+                        </div>
+
+                        <div class="zoom_box">
+                          <img
+                            src="./assets/img/product/single-product-slider-2.png"
+                            alt="Zoom Image 1"
+                          />
+                        </div>
+                      </div>
+                    </li>
+                    <li
+                      data-thumb="./assets/img/product/single-product-slider-3.png"
+                    >
+                      <div class="zoom_container">
+                        <div class="zoom_container_img">
+                          <img
+                            src="./assets/img/product/single-product-slider-3.png"
+                            alt="Product Image 1"
+                          />
+                        </div>
+
+                        <div class="zoom_box">
+                          <img
+                            src="./assets/img/product/single-product-slider-3.png"
+                            alt="Zoom Image 1"
+                          />
+                        </div>
+                      </div>
+                    </li>
+                    <li
+                      data-thumb="./assets/img/product/single-product-slider-4.png"
+                    >
+                      <div class="zoom_container">
+                        <div class="zoom_container_img">
+                          <img
+                            src="./assets/img/product/single-product-slider-4.png"
+                            alt="Product Image 1"
+                          />
+                        </div>
+
+                        <div class="zoom_box">
+                          <img
+                            src="./assets/img/product/single-product-slider-4.png"
+                            alt="Zoom Image 1"
+                          />
+                        </div>
+                      </div>
+                    </li>
+                    <li
+                      data-thumb="./assets/img/product/single-product-slider-5.png"
+                    >
+                      <div class="zoom_container">
+                        <div class="zoom_container_img">
+                          <img
+                            src="./assets/img/product/single-product-slider-5.png"
+                            alt="Product Image 1"
+                          />
+                        </div>
+
+                        <div class="zoom_box">
+                          <img
+                            src="./assets/img/product/single-product-slider-5.png"
+                            alt="Zoom Image 1"
+                          />
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <!-- Product Details Section -->
+              <div class="product_details_custom">
+                <h1>DJI Osmo Mobile 6</h1>
+                <div class="rating_custom">
+                  <span class="star">★</span>
+                  <p class="rate">4.5</p>
+                  <span class="bar">|</span>
+                  <p class="review">1,299 <span>rating</span></p>
+                </div>
+                <div class="price">
+                  <span class="discounted_price">$149.99</span>
+                  <span class="original_price">$169.99</span>
+                </div>
+                <div class="store_wrapper">
+                  <div class="store_tag"><span>DIGITAL STORE</span></div>
+                  <p class="store_status">
+                    <span>100+ bought</span> in the past month
+                  </p>
+                </div>
+
+                <div class="product_all_details">
+                  <div class="availability_custom">
+                    <span class="available">Available</span>
+                    <span class="in_stock"
+                      >:
+                      <p>In Stock</p></span
+                    >
+                  </div>
+
+                  <ul class="product_info_custom">
+                    <li>
+                      <strong>Color</strong>:
+                      <p>Slate Gray, Platinum Gray</p>
+                    </li>
+                    <li>
+                      <strong>Brand</strong>:
+                      <p>DJI</p>
+                    </li>
+                    <li>
+                      <strong>Compatible Devices</strong>:
+                      <p>Smartphones</p>
+                    </li>
+                    <li>
+                      <strong>Item Weight</strong>:
+                      <p>0.46 Kilograms</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="select_color_custom">
+                  <label>Select Color</label>:
+                  <button
+                    class="color_btn"
+                    style="background-color: #333"
+                  ></button>
+                  <button
+                    class="color_btn"
+                    style="background-color: #999"
+                  ></button>
+                </div>
+
+                <div class="action_buttons_custom">
+                  <div class="quantity_wrapper">
+                    <div class="quantity_custom">
+                      <button type="button" class="btn-decrease">-</button>
+                      <input type="number" id="quantity" min="1" value="1" />
+                      <button type="button" class="btn-increase">+</button>
+                    </div>
+                  </div>
+
+                  <div class="button_wrapper">
+                    <button class="add_to_cart">Add to Cart</button>
+                    <button class="buy_now">Buy Now</button>
+                  </div>
+                </div>
+
+                <div class="gift_receipt_custom">
+                  <label>
+                    <input type="checkbox" />
+                    <p>Add a gift receipt for easy returns</p>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about">
+            <h2 class="about_title">About this item</h2>
+            <p>
+              DJI Osmo Mobile 6 Gimbal Stabilizer for Smartphones, 3-Axis Phone
+              Gimbal, Built-In Extension Rod, Object Tracking, Portable and
+              Foldable, Vlogging Stabilizer, YouTube TikTok, Slate Gray
+            </p>
+            <p>
+              Silky Smooth Shots with 3-Axis Stabilization - You know what ruins
+              videos? Shaky footage! DJI OM 6 is here to help. This phone gimbal
+              ensures super steady shots, even when you're on the move. Say
+              hello to buttery-smooth videos!
+            </p>
+            <p>
+              So quick, So easy - This smartphone stabilizer powers on as soon
+              as you unfold it. Just attach your phone, and you are ready to
+              shoot! Catch that breathtaking sunset or your child's smile
+              without missing a beat.
+            </p>
+            <p>
+              So quick, So easy - This smartphone stabilizer powers on as soon
+              as you unfold it. Just attach your phone, and you are ready to
+              shoot! Catch that breathtaking sunset or your child's smile
+              without missing a beat.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Product Single End -->
+
+    <link
+      rel="stylesheet"
+      href="https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://sachinchoolur.github.io/lightslider/dist/js/lightslider.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        // Initialize lightSlider
+        $("#lightSlider").lightSlider({
+          gallery: true,
+          item: 1, // Number of items to display in the main slider
+          loop: true,
+          slideMargin: 0,
+          galleryMargin: 10, // Optional: Adds margin between thumbnails
+          thumbItem: 5, // Show 5 thumbnails in the gallery
+          onSliderLoad: function (el) {
+            el.lightGallery({
+              selector: "#lightSlider .lslide",
+            });
+          },
+        });
+
+        // Zoom functionality
+        $(".zoom_container").hover(
+          function () {
+            $(this).find(".zoom_box").fadeIn(200); // Show zoom box on hover
+          },
+          function () {
+            $(this).find(".zoom_box").fadeOut(200); // Hide zoom box when not hovering
+          }
+        );
+
+        // Mousemove for desktop
+        $(".zoom_container").mousemove(function (event) {
+          var zoomBox = $(this).find(".zoom_box");
+          var zoomImg = zoomBox.find("img");
+
+          var offset = $(this).offset();
+          var x = event.pageX - offset.left;
+          var y = event.pageY - offset.top;
+
+          // Calculate percentage of mouse position
+          var xPercent = (x / $(this).width()) * 100;
+          var yPercent = (y / $(this).height()) * 100;
+
+          // Set the position of the zoomed image
+          zoomImg.css({
+            left: -((xPercent / 100) * zoomImg.width() - zoomBox.width() / 2),
+            top: -((yPercent / 100) * zoomImg.height() - zoomBox.height() / 2),
+          });
+
+          // Set the position of the zoom box
+          zoomBox.css({
+            top: y - zoomBox.height() / 2 + "px",
+            left: x - zoomBox.width() / 2 + "px",
+          });
+        });
+
+        // Touch events for mobile
+        $(".zoom_container").on("touchstart touchmove", function (event) {
+          var zoomBox = $(this).find(".zoom_box");
+          var zoomImg = zoomBox.find("img");
+
+          var touch = event.originalEvent.touches[0];
+          var offset = $(this).offset();
+          var x = touch.pageX - offset.left;
+          var y = touch.pageY - offset.top;
+
+          // Show zoom box
+          zoomBox.fadeIn(200);
+
+          // Calculate percentage of touch position
+          var xPercent = (x / $(this).width()) * 100;
+          var yPercent = (y / $(this).height()) * 100;
+
+          // Set the position of the zoomed image
+          zoomImg.css({
+            left: -((xPercent / 100) * zoomImg.width() - zoomBox.width() / 2),
+            top: -((yPercent / 100) * zoomImg.height() - zoomBox.height() / 2),
+          });
+
+          // Set the position of the zoom box
+          zoomBox.css({
+            top: y - zoomBox.height() / 2 + "px",
+            left: x - zoomBox.width() / 2 + "px",
+          });
+
+          event.preventDefault(); // Prevent default behavior
+        });
+
+        // Disable touch events on the slider to prevent sliding
+        $("#lightSlider").on("touchstart touchmove", function (event) {
+          event.stopPropagation(); // Prevent touchstart/touchmove from reaching the slider
+        });
+
+        // Hide zoom box on touch end
+        $(".zoom_container").on("touchend", function () {
+          $(this).find(".zoom_box").fadeOut(200);
+        });
+
+        // Prevent default action on slider buttons
+        $(".lSAction").on("click", function (event) {
+          event.preventDefault(); // Prevent any default actions
+        });
+
+        // Automatically display the new slide after click on next or prev
+        $(".lSAction").on("click", function () {
+          // You may want to add a slight delay to allow the slide transition
+          setTimeout(function () {
+            $("#lightSlider").lightSlider("refresh"); // Refresh slider to update view
+          }, 300); // Adjust time as needed
+        });
+      });
+
+      // Slider End................................
+
+      // Slider Product Quantity Start..................
+      const decreaseBtn = document.querySelector(".btn-decrease");
+      const increaseBtn = document.querySelector(".btn-increase");
+      const quantityInput = document.getElementById("quantity");
+
+      decreaseBtn.addEventListener("click", () => {
+        if (quantityInput.value > 1) {
+          quantityInput.value = parseInt(quantityInput.value) - 1;
+        }
+      });
+
+      increaseBtn.addEventListener("click", () => {
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+      });
+
+      // Slider Product Quantity End..................
+    </script>
+  </body>
+</html>
